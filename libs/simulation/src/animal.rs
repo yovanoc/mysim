@@ -24,6 +24,10 @@ impl Animal {
     pub fn vision(&self) -> &[f32] {
         &self.vision
     }
+
+    pub fn speed(&self) -> f32 {
+        self.speed
+    }
 }
 
 impl Animal {

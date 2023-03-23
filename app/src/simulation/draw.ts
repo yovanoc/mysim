@@ -42,15 +42,15 @@ export const draw = (sim: SimulationView) => {
     v.drawLine(
       animal.x,
       animal.y,
-      animal.x - Math.sin(animal.rotation) * dist,
-      animal.y + Math.cos(animal.rotation) * dist,
+      animal.x + Math.cos(animal.rotation) * dist,
+      animal.y + Math.sin(animal.rotation) * dist,
       "rgb(150, 150, 150)"
     );
     v.drawFovCone(
       animal.x,
       animal.y,
       config.eye_fov_angle,
-      animal.rotation + Math.PI / 2,
+      animal.rotation,
       config.eye_fov_range,
       "rgba(0, 221, 255, 0.05)"
     );
@@ -63,7 +63,7 @@ export const draw = (sim: SimulationView) => {
         - config.eye_fov_angle / 2.0
         + cellId * anglePerCell
         // + 0;
-        + Math.PI / 2.0;
+        // + Math.PI / 2.0;
 
       const angleTo = angleFrom + anglePerCell;
       const energy = animal.vision[cellId];

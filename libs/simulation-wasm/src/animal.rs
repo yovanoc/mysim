@@ -6,6 +6,7 @@ pub struct Animal {
     pub y: f32,
     pub rotation: f32,
     pub vision: Vec<f32>,
+    pub speed: f32,
 }
 
 impl From<&sim::Animal> for Animal {
@@ -15,6 +16,7 @@ impl From<&sim::Animal> for Animal {
             y: animal.position().y,
             rotation: animal.rotation().angle(),
             vision: animal.vision().to_owned(),
+            speed: animal.speed()
         }
     }
 }
