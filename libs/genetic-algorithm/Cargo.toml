@@ -1,0 +1,15 @@
+[package]
+name = "genetic-algorithm"
+version = "0.1.0"
+authors = ["Christopher YOVANOVITCH <yovano_c@outlook.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.8.5"
+rand_chacha = "0.3.1"
+
+[dev-dependencies]
+approx = "0.5.1"
+maplit = "1.0"
