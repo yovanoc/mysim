@@ -46,14 +46,14 @@ export const draw = (sim: SimulationView) => {
       animal.y + Math.sin(animal.rotation) * dist,
       "rgb(150, 150, 150)"
     );
-    v.drawFovCone(
-      animal.x,
-      animal.y,
-      config.eye_fov_angle,
-      animal.rotation,
-      config.eye_fov_range,
-      "rgba(0, 221, 255, 0.05)"
-    );
+    // v.drawFovCone(
+    //   animal.x,
+    //   animal.y,
+    //   config.eye_fov_angle,
+    //   animal.rotation,
+    //   config.eye_fov_range,
+    //   "rgba(0, 221, 255, 0.05)"
+    // );
 
     const anglePerCell = config.eye_fov_angle / config.eye_cells;
 
