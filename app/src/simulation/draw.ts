@@ -1,11 +1,13 @@
 import { SimulationView } from ".";
 
 export const draw = (sim: SimulationView) => {
+  // console.log(sim.active)
   if (sim.active) {
-    const stats = sim.step();
-
-    if (stats) {
-      console.log(stats);
+    for (let i = 0; i < sim.stepByFrame; i += 1) {
+      const stats = sim.step();
+      if (stats) {
+        console.log(stats);
+      }
     }
   }
 
@@ -42,53 +44,46 @@ export const draw = (sim: SimulationView) => {
     v.drawLine(
       animal.x,
       animal.y,
-      animal.x + Math.cos(animal.rotation) * dist,
-      animal.y + Math.sin(animal.rotation) * dist,
-      "rgb(150, 150, 150)"
+      animal.x - Math.sin(animal.rotation) * dist,
+      animal.y + Math.cos(animal.rotation) * dist,
+      "rgb(150, 150, 150, 0.08)"
     );
+    const startAngle = animal.rotation - config.eye_fov_angle / 2 + Math.PI / 2;
     // v.drawFovCone(
-    //   animal.x,
-    //   animal.y,
-    //   config.eye_fov_angle,
-    //   animal.rotation,
-    //   config.eye_fov_range,
-    //   "rgba(0, 221, 255, 0.05)"
+    //   {
+    //     x: animal.x,
+    //     y: animal.y,
+    //     startAngle,
+    //     endAngle: startAngle + config.eye_fov_angle,
+    //     range: config.eye_fov_range,
+    //     fillStyle: "rgba(0, 221, 255, 0.04)",
+    //     strokeStyle: "rgba(0, 221, 255, 0.2)"
+    //   }
     // );
 
     const anglePerCell = config.eye_fov_angle / config.eye_cells;
 
     for (let cellId = 0; cellId < config.eye_cells; cellId += 1) {
       const angleFrom =
-        animal.rotation
-        - config.eye_fov_angle / 2.0
-        + cellId * anglePerCell
-        // + 0;
-        // + Math.PI / 2.0;
+        startAngle
+        + cellId * anglePerCell;
 
       const angleTo = angleFrom + anglePerCell;
       const energy = animal.vision[cellId];
 
-      for (let i = angleFrom; i < angleTo; i += 0.01) {
-        v.drawLine(
-          animal.x,
-          animal.y,
-          animal.x + Math.cos(i) * config.eye_fov_range,
-          animal.y + Math.sin(i) * config.eye_fov_range,
-          energy === 0
-            ? "rgba(0, 0, 0, 0.09)"
-            : `${sim.animalColors.get(`${animIdx}:${cellId}`)}, ${energy * 0.5})`
-        );
-      }
-      // v.drawFovCone(
-      //   animal.x,
-      //   animal.y,
-      //   config.eye_fov_angle / config.eye_cells,
-      //   angleFrom,
-      //   config.eye_fov_range,
-      //   energy === 0
-      //     ? "rgba(0, 0, 0, 0.08)"
-      //     : `${sim.animalColors.get(`${animIdx}:${cellId}`)}, ${energy})`
-      // );
+      v.drawFovCone(
+        {
+          x: animal.x,
+          y: animal.y,
+          startAngle: angleFrom,
+          endAngle: angleTo,
+          range: config.eye_fov_range,
+          fillStyle: energy === 0
+            ? "rgba(0, 0, 0, 0.08)"
+            : `rgba(0, 221, 255, ${energy * 0.4})`,
+          strokeStyle: "rgba(0, 221, 255, 0.02)"
+        }
+      );
 
       v.drawArc(
         animal.x,
@@ -100,6 +95,4 @@ export const draw = (sim: SimulationView) => {
       );
     }
   }
-
-  // requestAnimationFrame(() => draw(sim));
 };

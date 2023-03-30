@@ -30,16 +30,16 @@ impl Default for Config {
         Self {
             brain_neurons: 9,
             //
-            eye_fov_range: 0.1,
+            eye_fov_range: 0.15,
             // eye_fov_angle: PI + FRAC_PI_4,
-            eye_fov_angle: PI / 2.0,
+            eye_fov_angle: FRAC_PI_3,
             eye_cells: 9,
             //
             food_size: 0.01,
             //
             ga_reverse: 0,
             ga_mut_chance: 0.01,
-            ga_mut_coeff: 0.05,
+            ga_mut_coeff: 0.1,
             //
             sim_speed_min: 0.001,
             sim_speed_max: 0.005,
@@ -47,8 +47,8 @@ impl Default for Config {
             sim_rotation_accel: FRAC_PI_2,
             sim_generation_length: 2500,
             //
-            world_animals: 8,
-            world_foods: 80,
+            world_animals: 10,
+            world_foods: 55,
         }
     }
 }

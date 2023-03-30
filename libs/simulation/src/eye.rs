@@ -28,7 +28,7 @@ impl Eye {
                 continue;
             }
 
-            let angle = na::Rotation2::rotation_between(&na::Vector2::x(), &vec).angle();
+            let angle = na::Rotation2::rotation_between(&na::Vector2::y(), &vec).angle();
             let angle = angle - rotation.angle();
             let angle = na::wrap(angle, -PI, PI);
 

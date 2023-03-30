@@ -8,29 +8,22 @@ export class SimulationView {
   #canvas: HTMLCanvasElement;
   #viewport: Viewport;
   #active: boolean;
-  #animalColors: Map<string, string>;
+
+  #stepByFrame: number;
 
   constructor(sim: Simulation, canvas: HTMLCanvasElement) {
     this.#sim = sim;
     this.#canvas = canvas;
     this.#active = true;
     this.#viewport = new Viewport(canvas);
-    this.#animalColors = new Map<string, string>();
+    this.#stepByFrame = 1;
+  }
 
-    const config = sim.config();
-
-    if (this.#animalColors.size === 0) {
-      for (let i = 0; i < config.world_animals; i += 1) {
-        for (let j = 0; j < config.eye_cells; j += 1) {
-          const r = Math.floor(Math.random() * 255);
-          const g = Math.floor(Math.random() * 255);
-          const b = Math.floor(Math.random() * 255);
-          this.#animalColors.set(`${i}:${j}`, `rgba(${r}, ${g}, ${b}`);
-        }
-      }
-    }
-
+  setup() {
     setup(this);
+  }
+
+  draw() {
     draw(this);
   }
 
@@ -42,8 +35,12 @@ export class SimulationView {
     return this.#viewport;
   }
 
-  get animalColors() {
-    return this.#animalColors;
+  get stepByFrame() {
+    return this.#stepByFrame;
+  }
+
+  set stepByFrame(value: number) {
+    this.#stepByFrame = value;
   }
 
   togglePause() {
