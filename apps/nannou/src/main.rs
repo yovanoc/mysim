@@ -162,7 +162,8 @@ fn view(app: &App, model: &Model, frame: Frame) {
     draw.background().rgb(0.5, 0.5, 0.5);
 
     let w = app.window_rect();
-    app.main_window().set_title(&format!("MySim! {}", app.fps()));
+    app.main_window()
+        .set_title(&format!("MySim! {}", app.fps()));
     // draw.text(&format!("FPS: {}", app.fps()))
     //     .color(RED)
     //     .x_y(w.right() - 10.0, w.top() - 10.0)
@@ -171,8 +172,8 @@ fn view(app: &App, model: &Model, frame: Frame) {
 
     // draw.rect()
     //     .x_y(0.5, 0.5)
-        // .wh(vec2(0.5, 0.5))
-        // .color(BLACK);
+    // .wh(vec2(0.5, 0.5))
+    // .color(BLACK);
 
     model.simulation.render(&draw, config);
 
